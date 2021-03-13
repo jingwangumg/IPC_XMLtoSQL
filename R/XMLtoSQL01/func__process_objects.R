@@ -16,17 +16,18 @@ process_general_object <- function(xml_query, xml_node, xml_input, from_name) {
   node_tag <- xml_name(xml_node)
   node_name <- xml_attr(xml_node, "NAME")
   node_type <- xml_attr(xml_node, "TYPE")
-  # print(node_tag)
-  # print(node_name)
-  # print(node_type)
   
   # update aliases on columns
   if (node_tag != "SOURCE") { #another condition needed?
     xml_query <- update_column_aliases(xml_query, from_name, xml_attr(xml_node, "NAME"))
   }
   
+  print(xml_node)
   # process xml mapping object
   if (node_tag == "SOURCE") {                       # source
+    xml_query <- process_source_table(xml_query, xml_node)
+    # process xml mapping object
+  }else if (node_tag == "TARGET") {                       # source
     xml_query <- process_source_table(xml_query, xml_node)
   } else if (node_type == "Source Qualifier") {     # SQ
     xml_query <- process_source_qualifier(xml_query, xml_node, from_name)
@@ -57,6 +58,7 @@ process_general_object <- function(xml_query, xml_node, xml_input, from_name) {
   # check outgoing connectors - where to go
   # if only one, can go
   # if the target object has only this unique connector, can go
+  print(connectors_unique_df)
   outgoing_connectors <- subset(connectors_unique_df, from_instance == node_name)
   target_inc_connectors <- subset(connectors_unique_df, to_instance == outgoing_connectors$to_instance)
   if (nrow(outgoing_connectors) == 1 && nrow(target_inc_connectors) == 1) { #straight line of succesion

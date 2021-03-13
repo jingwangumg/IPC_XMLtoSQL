@@ -65,6 +65,7 @@ build_where_part <- function(xml_query) {
   where_part <- "WHERE 1=1"
   # conditions
   conditions <- getNodeSet(xml_query, "//CONDITION")
+  if(length(conditions)==0) return(where_part)
   for (i in 1:length(conditions)) {
     attrs <- xmlAttrs(conditions[i][[1]])
     where_part <- paste(where_part, "\n", paste0(" AND (", attrs[1]), ")")

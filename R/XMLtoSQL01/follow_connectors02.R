@@ -21,6 +21,8 @@ for (con_i in 1:length(connectors_all)) {
 connectors_all_df <- data.frame(from_instance, to_instance, from_field, to_field)
 connectors_unique_df <- unique(data.frame(from_instance, to_instance))
 all_objects <- unique(append(from_instance,to_instance))
+print(connectors_all_df)
+print(connectors_unique_df)
 rm("from_instance", "to_instance", "from_field", "to_field")
 
 #################################################

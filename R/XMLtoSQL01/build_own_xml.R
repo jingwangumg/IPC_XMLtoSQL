@@ -10,7 +10,9 @@ counters_env$select_no <- 0
 counters_env$source_no <- 0
 
 #read xml
-xml_input <- read_xml("example.xml")
+#xml_input <- read_xml("example.XML")
+xml_input <- read_xml("../test_files/simple_m_om_wc_pim_dt_unique.XML")
+#xml_input <- read_xml("/test_files/example.xml")
 
 ## connectory medzi objektmi ########
 connectors_all <- xml_find_all(xml_input, ".//CONNECTOR")
@@ -41,18 +43,23 @@ rm("from_instance", "to_instance", "from_field", "to_field")
 
 # find all sources ################ 
 sources <- xml_find_all(xml_input, ".//SOURCE")
-xml_query <- newXMLDoc()
 for (src in sources) {
+  print(src)
+  xml_query <- newXMLDoc()
   xml_query <- process_general_object(xml_query, src, xml_input, NULL)
+  sql_query <- xml_to_sql(xml_query)
+  #print(xml_query)
+  writeLines(sql_query)
+
 }
+# print(xml_query)
+# ## SQL query
+# sql_query <- xml_to_sql(xml_query)
 
-## SQL query
-sql_query <- xml_to_sql(xml_query)
-
-## output at end
-writeLines("")
-writeLines("output:")
-print(xml_query)
-writeLines(sql_query)
+# ## output at end
+# writeLines("")
+# writeLines("output:")
+# print(xml_query)
+# writeLines(sql_query)
 
 
