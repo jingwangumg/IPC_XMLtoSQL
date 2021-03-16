@@ -172,24 +172,58 @@ process_lookup_procdure <- function(xml_query, xml_node, from_name) {
   curr_select <- paste0("sub", counters_env$select_no)
   select_node <- newXMLNode("SELECT", attrs = c(alias = curr_select), doc = xml_query)
 
-  sql_node <- xml_find_all(xml_node, ".//TABLEATTRIBUTE[@NAME='Lookup Sql Override']")
-  print(paste0("===================  WARNING:  ",from_name," Looup SQL overwrite ======================"))
-  cat(paste(xml_attr(sql_node, "VALUE"),"\r\n"))
-  print(paste0("=================== End WARNING:  ",from_name," Looup SQL overwrite ======================"))
+  sql_override <- xml_attr(xml_find_first(xml_node, ".//TABLEATTRIBUTE[@NAME='Lookup Sql Override']"),"VALUE")
+  #if(unname(sql_override) != "") {
+    print(paste0("===================  WARNING:  ",from_name," Looup SQL overwrite ======================"))
+    cat(paste(unname(sql_override),"\r\n"))
+    print(paste0("=================== End WARNING:  ",from_name," Looup SQL overwrite ======================"))
+    ## return(xml_query). ## TODO: print empty xml_query not supported yet
+  #}
 
   curr_source <- paste0("src", counters_env$source_no)
   select_node <- getNodeSet(xml_query, "//SELECT") 
-
-  newXMLNode("TABLE", attrs = c(name = xml_attr(xml_node, "NAME"), 
-                                alias = curr_source),
-             parent = select_node)
+  lookup_table_name <- unname(xml_attr(xml_find_first(xml_node, ".//TABLEATTRIBUTE[@NAME='Lookup table name']"), "VALUE"))
+  lookup_source_filter <- unname(xml_attr(xml_find_first(xml_node, ".//TABLEATTRIBUTE[@NAME='Lookup Source Filter']"), "VALUE"))
+  lookup_condition <- unname(xml_attr(xml_find_first(xml_node, ".//TABLEATTRIBUTE[@NAME='Lookup condition']"), "VALUE"))
+  print(paste0("Table name: ",lookup_table_name,"  Condition: ",lookup_condition, "  Source Filter: ",lookup_source_filter ))
+  
+ 
   # add COLUMN nodes inside
   columns <- xml_find_all(xml_node, ".//TRANSFORMFIELD") 
   for (col in columns) {
-    at_name <- xml_attr(col, "NAME")
+    at_name <- unname(xml_attr(col, "NAME"))
+    connector<- xml_find_first(xml_node, paste0("//CONNECTOR[@TOINSTANCE='", from_name, "' and @TOFIELD='",at_name,"']")) 
+    source_instance <- unname(xml_attr(connector, "FROMINSTANCE"))
+    if(is.na(source_instance)) source_instance=lookup_table_name
+
+    conn_from_field <- xml_attr(connector, "FROMFIELD")
+
+    ## creating table or includeboject
+    source_node <- getNodeSet(xml_query, paste0("//*[@name='", source_instance, "']"))
+    if(length(source_node)==1){
+      # print("already existied source")
+    }else{
+      counters_env$source_no <<- counters_env$source_no+1
+      curr_source <- paste0("src", counters_env$source_no)
+
+      table_node <- getNodeSet(xml_query, paste0("//TABLE"))
+      
+      # if(length(table_node) == 0 ){
+        # add TABLE node inside
+      newXMLNode("TABLE", attrs = c(name = source_instance, 
+                                    alias = curr_source),
+                 parent = select_node)
+      # }else{
+
+      #   newXMLNode("INCLUDED_OBJECT", attrs = c(name = source_instance, 
+      #                               alias = curr_source),
+      #               parent = select_node)
+      # }
+    }
 
     xml_find_all(xml_node, ".//TRANSFORMFIELD") 
-    newXMLNode("COLUMN", attrs = c(name = at_name, alias = at_name, source = curr_source,
+    if(is.na(conn_from_field)) conn_from_field<-at_name
+    newXMLNode("COLUMN", attrs = c(name = conn_from_field, alias = at_name, source = curr_source,
                                    value = paste0(curr_source, ".", at_name)),
                parent = select_node)
   }
