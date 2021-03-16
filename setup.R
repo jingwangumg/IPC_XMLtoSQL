@@ -22,6 +22,6 @@ if(firsttime){ #Just install
 #directly accessed libraries by tsfunctions 
 loadlibrary("xml2",firsttime)
 loadlibrary("XML",firsttime)
-loadlibrary("igraph", firsttime)
+install.packages("igraph")
 
 rm(firsttime)
