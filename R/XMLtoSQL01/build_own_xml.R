@@ -1,17 +1,20 @@
 library("xml2")
 library("XML")
+library("igraph")
 
 source("./func__process_objects.R")
 source("./func__write_sql.R")
 
 ## global variables ##########
-counters_env <- new.env()
+counters_env <<- new.env()
 counters_env$select_no <- 0
 counters_env$source_no <- 0
 
 #read xml
 #xml_input <- read_xml("example.XML")
-xml_input <- read_xml("../test_files/simple_m_om_wc_pim_dt_unique.XML")
+#xml_input <- read_xml("../test_files/hard_m_om_sde_li_dim.xml")
+xml_input <- read_xml("../test_files/hard_m_om_sde_li_dim.XML")
+
 #xml_input <- read_xml("/test_files/example.xml")
 
 ## connectory medzi objektmi ########
@@ -28,8 +31,8 @@ for (con_i in 1:length(connectors_all)) {
   to_field <- append(to_field, xml_attr(connectors_all[con_i], "TOFIELD"))
 } 
 connectors_all_df <- data.frame(from_instance, to_instance, from_field, to_field, stringsAsFactors = F)
-connectors_unique_df <- unique(data.frame(from_instance, to_instance, stringsAsFactors = F))
-all_objects <- unique(append(from_instance,to_instance))
+connectors_unique_df <<- unique(data.frame(from_instance, to_instance, stringsAsFactors = F))
+ all_objects <- unique(append(from_instance,to_instance))
 rm("from_instance", "to_instance", "from_field", "to_field")
 
 
@@ -42,16 +45,42 @@ rm("from_instance", "to_instance", "from_field", "to_field")
 # pop from queue first branch that has requirements met
 
 # find all sources ################ 
-sources <- xml_find_all(xml_input, ".//SOURCE")
-for (src in sources) {
-  print(src)
-  xml_query <- newXMLDoc()
-  xml_query <- process_general_object(xml_query, src, xml_input, NULL)
-  sql_query <- xml_to_sql(xml_query)
-  #print(xml_query)
-  writeLines(sql_query)
+print(connectors_unique_df)
 
+sources <- xml_find_all(xml_input, ".//SOURCE")
+g<-graph.data.frame(d = connectors_unique_df, directed = TRUE)
+sorted <- topo_sort(g, mode = c("out"))
+
+cat("\r\n")
+print("=========================topology order==================================")
+print(as.matrix(sorted))
+
+cat("\r\n")
+
+xml_query <- newXMLDoc()
+
+for (i in  1:length(sorted)){
+	print(paste0("-------",as_ids(sorted[i]), " : ",i))
+	xml_query <- newXMLDoc()
+
+	#connectors_unique_df[nrow(connectors_unique_df)+1,] = list("START",xml_attr(src, "NAME"))
+	process_general_object(xml_query, NULL, xml_input, as_ids(sorted[i]))
+	#writeLines(sql_query)
 }
+#sql_query <- xml_to_sql(xml_query)
+
+# connectors_unique_df$processed <- rep(0,length(connectors_unique_df$to_instance))
+# print("###############################################################")
+# print(connectors_unique_df)
+
+
+# xml_query <- newXMLDoc()
+# xml_query <- process_general_object(xml_query, NULL, xml_input, "START")
+# #print(xml_query)
+
+# sql_query <- xml_to_sql(xml_query)
+# writeLines(sql_query)
+
 # print(xml_query)
 # ## SQL query
 # sql_query <- xml_to_sql(xml_query)

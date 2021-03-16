@@ -1,0 +1,376 @@
+                        from_instance                       to_instance
+1             LKP_ORIG_LINE_COMPONENT                   WC_LINEITEMS_DS
+3                            EXPTRANS                   WC_LINEITEMS_DS
+40        LKPTRANS_WSH_NEW_DELIVERIES            EXP_ACTUAL_SHIP_METHOD
+42             EXP_ACTUAL_SHIP_METHOD        LKPTRANS_FND_LOOKUP_VALUES
+43                 OE_ORDER_LINES_ALL             SQ_OE_ORDER_LINES_ALL
+59               OE_ORDER_HEADERS_ALL             SQ_OE_ORDER_LINES_ALL
+60              SQ_OE_ORDER_LINES_ALL                         EXPTRANS1
+78              SQ_OE_ORDER_LINES_ALL     LKPTRANS_WSH_DELIVERY_DETAILS
+80              SQ_OE_ORDER_LINES_ALL                         LKP_PROMO
+82                          EXPTRANS1                          EXPTRANS
+83        LKPTRANS_WSH_NEW_DELIVERIES                          EXPTRANS
+84                      LKP_LINE_HOLD                          EXPTRANS
+85         LKPTRANS_FND_LOOKUP_VALUES                          EXPTRANS
+86                         LKUP_TRANS                          EXPTRANS
+87      LKPTRANS_WSH_DELIVERY_DETAILS                          EXPTRANS
+93                          LKP_PROMO                          EXPTRANS
+96             LKP_LINE_STATUS_DETAIL                          EXPTRANS
+115                         EXPTRANS1            LKP_LINE_STATUS_DETAIL
+116                         EXPTRANS1                     LKP_LINE_HOLD
+118                         EXPTRANS1           LKP_ORIG_LINE_COMPONENT
+119     LKPTRANS_WSH_DELIVERY_DETAILS                        LKUP_TRANS
+120     LKPTRANS_WSH_DELIVERY_DETAILS LKPTRANS_WSH_DELIVERY_ASSIGNMENTS
+121 LKPTRANS_WSH_DELIVERY_ASSIGNMENTS       LKPTRANS_WSH_NEW_DELIVERIES
+[1] "-------OE_ORDER_LINES_ALL : 1"
+[1] "------------------ processing OE_ORDER_LINES_ALL ------------------"
+{xml_nodeset (1)}
+[1] <SOURCE BUSINESSNAME="" DATABASETYPE="Oracle" DBDNAME="EBS" DESCRIPTION=" ...
+[1] "*********************src0"
+<?xml version="1.0"?>
+<SELECT alias="sub1">
+  <TABLE name="OE_ORDER_LINES_ALL" alias="src0"/>
+  <COLUMN name="LINE_ID" alias="LINE_ID" source="src0" value="src0.LINE_ID"/>
+  <COLUMN name="ORG_ID" alias="ORG_ID" source="src0" value="src0.ORG_ID"/>
+  <COLUMN name="HEADER_ID" alias="HEADER_ID" source="src0" value="src0.HEADER_ID"/>
+  <COLUMN name="LINE_TYPE_ID" alias="LINE_TYPE_ID" source="src0" value="src0.LINE_TYPE_ID"/>
+  <COLUMN name="LINE_NUMBER" alias="LINE_NUMBER" source="src0" value="src0.LINE_NUMBER"/>
+  <COLUMN name="ORDERED_ITEM" alias="ORDERED_ITEM" source="src0" value="src0.ORDERED_ITEM"/>
+  <COLUMN name="REQUEST_DATE" alias="REQUEST_DATE" source="src0" value="src0.REQUEST_DATE"/>
+  <COLUMN name="PROMISE_DATE" alias="PROMISE_DATE" source="src0" value="src0.PROMISE_DATE"/>
+  <COLUMN name="SCHEDULE_SHIP_DATE" alias="SCHEDULE_SHIP_DATE" source="src0" value="src0.SCHEDULE_SHIP_DATE"/>
+  <COLUMN name="ORDER_QUANTITY_UOM" alias="ORDER_QUANTITY_UOM" source="src0" value="src0.ORDER_QUANTITY_UOM"/>
+  <COLUMN name="PRICING_QUANTITY" alias="PRICING_QUANTITY" source="src0" value="src0.PRICING_QUANTITY"/>
+  <COLUMN name="PRICING_QUANTITY_UOM" alias="PRICING_QUANTITY_UOM" source="src0" value="src0.PRICING_QUANTITY_UOM"/>
+  <COLUMN name="CANCELLED_QUANTITY" alias="CANCELLED_QUANTITY" source="src0" value="src0.CANCELLED_QUANTITY"/>
+  <COLUMN name="SHIPPED_QUANTITY" alias="SHIPPED_QUANTITY" source="src0" value="src0.SHIPPED_QUANTITY"/>
+  <COLUMN name="ORDERED_QUANTITY" alias="ORDERED_QUANTITY" source="src0" value="src0.ORDERED_QUANTITY"/>
+  <COLUMN name="FULFILLED_QUANTITY" alias="FULFILLED_QUANTITY" source="src0" value="src0.FULFILLED_QUANTITY"/>
+  <COLUMN name="SHIPPING_QUANTITY" alias="SHIPPING_QUANTITY" source="src0" value="src0.SHIPPING_QUANTITY"/>
+  <COLUMN name="SHIPPING_QUANTITY_UOM" alias="SHIPPING_QUANTITY_UOM" source="src0" value="src0.SHIPPING_QUANTITY_UOM"/>
+  <COLUMN name="DELIVERY_LEAD_TIME" alias="DELIVERY_LEAD_TIME" source="src0" value="src0.DELIVERY_LEAD_TIME"/>
+  <COLUMN name="TAX_EXEMPT_FLAG" alias="TAX_EXEMPT_FLAG" source="src0" value="src0.TAX_EXEMPT_FLAG"/>
+  <COLUMN name="TAX_EXEMPT_NUMBER" alias="TAX_EXEMPT_NUMBER" source="src0" value="src0.TAX_EXEMPT_NUMBER"/>
+  <COLUMN name="TAX_EXEMPT_REASON_CODE" alias="TAX_EXEMPT_REASON_CODE" source="src0" value="src0.TAX_EXEMPT_REASON_CODE"/>
+  <COLUMN name="SHIP_FROM_ORG_ID" alias="SHIP_FROM_ORG_ID" source="src0" value="src0.SHIP_FROM_ORG_ID"/>
+  <COLUMN name="SHIP_TO_ORG_ID" alias="SHIP_TO_ORG_ID" source="src0" value="src0.SHIP_TO_ORG_ID"/>
+  <COLUMN name="INVOICE_TO_ORG_ID" alias="INVOICE_TO_ORG_ID" source="src0" value="src0.INVOICE_TO_ORG_ID"/>
+  <COLUMN name="DELIVER_TO_ORG_ID" alias="DELIVER_TO_ORG_ID" source="src0" value="src0.DELIVER_TO_ORG_ID"/>
+  <COLUMN name="SHIP_TO_CONTACT_ID" alias="SHIP_TO_CONTACT_ID" source="src0" value="src0.SHIP_TO_CONTACT_ID"/>
+  <COLUMN name="DELIVER_TO_CONTACT_ID" alias="DELIVER_TO_CONTACT_ID" source="src0" value="src0.DELIVER_TO_CONTACT_ID"/>
+  <COLUMN name="INVOICE_TO_CONTACT_ID" alias="INVOICE_TO_CONTACT_ID" source="src0" value="src0.INVOICE_TO_CONTACT_ID"/>
+  <COLUMN name="INTMED_SHIP_TO_ORG_ID" alias="INTMED_SHIP_TO_ORG_ID" source="src0" value="src0.INTMED_SHIP_TO_ORG_ID"/>
+  <COLUMN name="INTMED_SHIP_TO_CONTACT_ID" alias="INTMED_SHIP_TO_CONTACT_ID" source="src0" value="src0.INTMED_SHIP_TO_CONTACT_ID"/>
+  <COLUMN name="SOLD_FROM_ORG_ID" alias="SOLD_FROM_ORG_ID" source="src0" value="src0.SOLD_FROM_ORG_ID"/>
+  <COLUMN name="SOLD_TO_ORG_ID" alias="SOLD_TO_ORG_ID" source="src0" value="src0.SOLD_TO_ORG_ID"/>
+  <COLUMN name="CUST_PO_NUMBER" alias="CUST_PO_NUMBER" source="src0" value="src0.CUST_PO_NUMBER"/>
+  <COLUMN name="SHIP_TOLERANCE_ABOVE" alias="SHIP_TOLERANCE_ABOVE" source="src0" value="src0.SHIP_TOLERANCE_ABOVE"/>
+  <COLUMN name="SHIP_TOLERANCE_BELOW" alias="SHIP_TOLERANCE_BELOW" source="src0" value="src0.SHIP_TOLERANCE_BELOW"/>
+  <COLUMN name="DEMAND_BUCKET_TYPE_CODE" alias="DEMAND_BUCKET_TYPE_CODE" source="src0" value="src0.DEMAND_BUCKET_TYPE_CODE"/>
+  <COLUMN name="VEH_CUS_ITEM_CUM_KEY_ID" alias="VEH_CUS_ITEM_CUM_KEY_ID" source="src0" value="src0.VEH_CUS_ITEM_CUM_KEY_ID"/>
+  <COLUMN name="RLA_SCHEDULE_TYPE_CODE" alias="RLA_SCHEDULE_TYPE_CODE" source="src0" value="src0.RLA_SCHEDULE_TYPE_CODE"/>
+  <COLUMN name="CUSTOMER_DOCK_CODE" alias="CUSTOMER_DOCK_CODE" source="src0" value="src0.CUSTOMER_DOCK_CODE"/>
+  <COLUMN name="CUSTOMER_JOB" alias="CUSTOMER_JOB" source="src0" value="src0.CUSTOMER_JOB"/>
+  <COLUMN name="CUSTOMER_PRODUCTION_LINE" alias="CUSTOMER_PRODUCTION_LINE" source="src0" value="src0.CUSTOMER_PRODUCTION_LINE"/>
+  <COLUMN name="CUST_MODEL_SERIAL_NUMBER" alias="CUST_MODEL_SERIAL_NUMBER" source="src0" value="src0.CUST_MODEL_SERIAL_NUMBER"/>
+  <COLUMN name="PROJECT_ID" alias="PROJECT_ID" source="src0" value="src0.PROJECT_ID"/>
+  <COLUMN name="TASK_ID" alias="TASK_ID" source="src0" value="src0.TASK_ID"/>
+  <COLUMN name="INVENTORY_ITEM_ID" alias="INVENTORY_ITEM_ID" source="src0" value="src0.INVENTORY_ITEM_ID"/>
+  <COLUMN name="TAX_DATE" alias="TAX_DATE" source="src0" value="src0.TAX_DATE"/>
+  <COLUMN name="TAX_CODE" alias="TAX_CODE" source="src0" value="src0.TAX_CODE"/>
+  <COLUMN name="TAX_RATE" alias="TAX_RATE" source="src0" value="src0.TAX_RATE"/>
+  <COLUMN name="INVOICE_INTERFACE_STATUS_CODE" alias="INVOICE_INTERFACE_STATUS_CODE" source="src0" value="src0.INVOICE_INTERFACE_STATUS_CODE"/>
+  <COLUMN name="DEMAND_CLASS_CODE" alias="DEMAND_CLASS_CODE" source="src0" value="src0.DEMAND_CLASS_CODE"/>
+  <COLUMN name="PRICE_LIST_ID" alias="PRICE_LIST_ID" source="src0" value="src0.PRICE_LIST_ID"/>
+  <COLUMN name="PRICING_DATE" alias="PRICING_DATE" source="src0" value="src0.PRICING_DATE"/>
+  <COLUMN name="SHIPMENT_NUMBER" alias="SHIPMENT_NUMBER" source="src0" value="src0.SHIPMENT_NUMBER"/>
+  <COLUMN name="AGREEMENT_ID" alias="AGREEMENT_ID" source="src0" value="src0.AGREEMENT_ID"/>
+  <COLUMN name="SHIPMENT_PRIORITY_CODE" alias="SHIPMENT_PRIORITY_CODE" source="src0" value="src0.SHIPMENT_PRIORITY_CODE"/>
+  <COLUMN name="SHIPPING_METHOD_CODE" alias="SHIPPING_METHOD_CODE" source="src0" value="src0.SHIPPING_METHOD_CODE"/>
+  <COLUMN name="FREIGHT_CARRIER_CODE" alias="FREIGHT_CARRIER_CODE" source="src0" value="src0.FREIGHT_CARRIER_CODE"/>
+  <COLUMN name="FREIGHT_TERMS_CODE" alias="FREIGHT_TERMS_CODE" source="src0" value="src0.FREIGHT_TERMS_CODE"/>
+  <COLUMN name="FOB_POINT_CODE" alias="FOB_POINT_CODE" source="src0" value="src0.FOB_POINT_CODE"/>
+  <COLUMN name="TAX_POINT_CODE" alias="TAX_POINT_CODE" source="src0" value="src0.TAX_POINT_CODE"/>
+  <COLUMN name="PAYMENT_TERM_ID" alias="PAYMENT_TERM_ID" source="src0" value="src0.PAYMENT_TERM_ID"/>
+  <COLUMN name="INVOICING_RULE_ID" alias="INVOICING_RULE_ID" source="src0" value="src0.INVOICING_RULE_ID"/>
+  <COLUMN name="ACCOUNTING_RULE_ID" alias="ACCOUNTING_RULE_ID" source="src0" value="src0.ACCOUNTING_RULE_ID"/>
+  <COLUMN name="SOURCE_DOCUMENT_TYPE_ID" alias="SOURCE_DOCUMENT_TYPE_ID" source="src0" value="src0.SOURCE_DOCUMENT_TYPE_ID"/>
+  <COLUMN name="ORIG_SYS_DOCUMENT_REF" alias="ORIG_SYS_DOCUMENT_REF" source="src0" value="src0.ORIG_SYS_DOCUMENT_REF"/>
+  <COLUMN name="SOURCE_DOCUMENT_ID" alias="SOURCE_DOCUMENT_ID" source="src0" value="src0.SOURCE_DOCUMENT_ID"/>
+  <COLUMN name="ORIG_SYS_LINE_REF" alias="ORIG_SYS_LINE_REF" source="src0" value="src0.ORIG_SYS_LINE_REF"/>
+  <COLUMN name="SOURCE_DOCUMENT_LINE_ID" alias="SOURCE_DOCUMENT_LINE_ID" source="src0" value="src0.SOURCE_DOCUMENT_LINE_ID"/>
+  <COLUMN name="REFERENCE_LINE_ID" alias="REFERENCE_LINE_ID" source="src0" value="src0.REFERENCE_LINE_ID"/>
+  <COLUMN name="REFERENCE_TYPE" alias="REFERENCE_TYPE" source="src0" value="src0.REFERENCE_TYPE"/>
+  <COLUMN name="REFERENCE_HEADER_ID" alias="REFERENCE_HEADER_ID" source="src0" value="src0.REFERENCE_HEADER_ID"/>
+  <COLUMN name="ITEM_REVISION" alias="ITEM_REVISION" source="src0" value="src0.ITEM_REVISION"/>
+  <COLUMN name="UNIT_SELLING_PRICE" alias="UNIT_SELLING_PRICE" source="src0" value="src0.UNIT_SELLING_PRICE"/>
+  <COLUMN name="UNIT_LIST_PRICE" alias="UNIT_LIST_PRICE" source="src0" value="src0.UNIT_LIST_PRICE"/>
+  <COLUMN name="TAX_VALUE" alias="TAX_VALUE" source="src0" value="src0.TAX_VALUE"/>
+  <COLUMN name="CONTEXT" alias="CONTEXT" source="src0" value="src0.CONTEXT"/>
+  <COLUMN name="ATTRIBUTE1" alias="ATTRIBUTE1" source="src0" value="src0.ATTRIBUTE1"/>
+  <COLUMN name="ATTRIBUTE2" alias="ATTRIBUTE2" source="src0" value="src0.ATTRIBUTE2"/>
+  <COLUMN name="ATTRIBUTE3" alias="ATTRIBUTE3" source="src0" value="src0.ATTRIBUTE3"/>
+  <COLUMN name="ATTRIBUTE4" alias="ATTRIBUTE4" source="src0" value="src0.ATTRIBUTE4"/>
+  <COLUMN name="ATTRIBUTE5" alias="ATTRIBUTE5" source="src0" value="src0.ATTRIBUTE5"/>
+  <COLUMN name="ATTRIBUTE6" alias="ATTRIBUTE6" source="src0" value="src0.ATTRIBUTE6"/>
+  <COLUMN name="ATTRIBUTE7" alias="ATTRIBUTE7" source="src0" value="src0.ATTRIBUTE7"/>
+  <COLUMN name="ATTRIBUTE8" alias="ATTRIBUTE8" source="src0" value="src0.ATTRIBUTE8"/>
+  <COLUMN name="ATTRIBUTE9" alias="ATTRIBUTE9" source="src0" value="src0.ATTRIBUTE9"/>
+  <COLUMN name="ATTRIBUTE10" alias="ATTRIBUTE10" source="src0" value="src0.ATTRIBUTE10"/>
+  <COLUMN name="ATTRIBUTE11" alias="ATTRIBUTE11" source="src0" value="src0.ATTRIBUTE11"/>
+  <COLUMN name="ATTRIBUTE12" alias="ATTRIBUTE12" source="src0" value="src0.ATTRIBUTE12"/>
+  <COLUMN name="ATTRIBUTE13" alias="ATTRIBUTE13" source="src0" value="src0.ATTRIBUTE13"/>
+  <COLUMN name="ATTRIBUTE14" alias="ATTRIBUTE14" source="src0" value="src0.ATTRIBUTE14"/>
+  <COLUMN name="ATTRIBUTE15" alias="ATTRIBUTE15" source="src0" value="src0.ATTRIBUTE15"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE_CATEGORY" alias="GLOBAL_ATTRIBUTE_CATEGORY" source="src0" value="src0.GLOBAL_ATTRIBUTE_CATEGORY"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE1" alias="GLOBAL_ATTRIBUTE1" source="src0" value="src0.GLOBAL_ATTRIBUTE1"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE2" alias="GLOBAL_ATTRIBUTE2" source="src0" value="src0.GLOBAL_ATTRIBUTE2"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE3" alias="GLOBAL_ATTRIBUTE3" source="src0" value="src0.GLOBAL_ATTRIBUTE3"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE4" alias="GLOBAL_ATTRIBUTE4" source="src0" value="src0.GLOBAL_ATTRIBUTE4"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE5" alias="GLOBAL_ATTRIBUTE5" source="src0" value="src0.GLOBAL_ATTRIBUTE5"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE6" alias="GLOBAL_ATTRIBUTE6" source="src0" value="src0.GLOBAL_ATTRIBUTE6"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE7" alias="GLOBAL_ATTRIBUTE7" source="src0" value="src0.GLOBAL_ATTRIBUTE7"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE8" alias="GLOBAL_ATTRIBUTE8" source="src0" value="src0.GLOBAL_ATTRIBUTE8"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE9" alias="GLOBAL_ATTRIBUTE9" source="src0" value="src0.GLOBAL_ATTRIBUTE9"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE10" alias="GLOBAL_ATTRIBUTE10" source="src0" value="src0.GLOBAL_ATTRIBUTE10"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE11" alias="GLOBAL_ATTRIBUTE11" source="src0" value="src0.GLOBAL_ATTRIBUTE11"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE12" alias="GLOBAL_ATTRIBUTE12" source="src0" value="src0.GLOBAL_ATTRIBUTE12"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE13" alias="GLOBAL_ATTRIBUTE13" source="src0" value="src0.GLOBAL_ATTRIBUTE13"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE14" alias="GLOBAL_ATTRIBUTE14" source="src0" value="src0.GLOBAL_ATTRIBUTE14"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE15" alias="GLOBAL_ATTRIBUTE15" source="src0" value="src0.GLOBAL_ATTRIBUTE15"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE16" alias="GLOBAL_ATTRIBUTE16" source="src0" value="src0.GLOBAL_ATTRIBUTE16"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE17" alias="GLOBAL_ATTRIBUTE17" source="src0" value="src0.GLOBAL_ATTRIBUTE17"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE18" alias="GLOBAL_ATTRIBUTE18" source="src0" value="src0.GLOBAL_ATTRIBUTE18"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE19" alias="GLOBAL_ATTRIBUTE19" source="src0" value="src0.GLOBAL_ATTRIBUTE19"/>
+  <COLUMN name="GLOBAL_ATTRIBUTE20" alias="GLOBAL_ATTRIBUTE20" source="src0" value="src0.GLOBAL_ATTRIBUTE20"/>
+  <COLUMN name="PRICING_CONTEXT" alias="PRICING_CONTEXT" source="src0" value="src0.PRICING_CONTEXT"/>
+  <COLUMN name="PRICING_ATTRIBUTE1" alias="PRICING_ATTRIBUTE1" source="src0" value="src0.PRICING_ATTRIBUTE1"/>
+  <COLUMN name="PRICING_ATTRIBUTE2" alias="PRICING_ATTRIBUTE2" source="src0" value="src0.PRICING_ATTRIBUTE2"/>
+  <COLUMN name="PRICING_ATTRIBUTE3" alias="PRICING_ATTRIBUTE3" source="src0" value="src0.PRICING_ATTRIBUTE3"/>
+  <COLUMN name="PRICING_ATTRIBUTE4" alias="PRICING_ATTRIBUTE4" source="src0" value="src0.PRICING_ATTRIBUTE4"/>
+  <COLUMN name="PRICING_ATTRIBUTE5" alias="PRICING_ATTRIBUTE5" source="src0" value="src0.PRICING_ATTRIBUTE5"/>
+  <COLUMN name="PRICING_ATTRIBUTE6" alias="PRICING_ATTRIBUTE6" source="src0" value="src0.PRICING_ATTRIBUTE6"/>
+  <COLUMN name="PRICING_ATTRIBUTE7" alias="PRICING_ATTRIBUTE7" source="src0" value="src0.PRICING_ATTRIBUTE7"/>
+  <COLUMN name="PRICING_ATTRIBUTE8" alias="PRICING_ATTRIBUTE8" source="src0" value="src0.PRICING_ATTRIBUTE8"/>
+  <COLUMN name="PRICING_ATTRIBUTE9" alias="PRICING_ATTRIBUTE9" source="src0" value="src0.PRICING_ATTRIBUTE9"/>
+  <COLUMN name="PRICING_ATTRIBUTE10" alias="PRICING_ATTRIBUTE10" source="src0" value="src0.PRICING_ATTRIBUTE10"/>
+  <COLUMN name="INDUSTRY_CONTEXT" alias="INDUSTRY_CONTEXT" source="src0" value="src0.INDUSTRY_CONTEXT"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE1" alias="INDUSTRY_ATTRIBUTE1" source="src0" value="src0.INDUSTRY_ATTRIBUTE1"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE2" alias="INDUSTRY_ATTRIBUTE2" source="src0" value="src0.INDUSTRY_ATTRIBUTE2"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE3" alias="INDUSTRY_ATTRIBUTE3" source="src0" value="src0.INDUSTRY_ATTRIBUTE3"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE4" alias="INDUSTRY_ATTRIBUTE4" source="src0" value="src0.INDUSTRY_ATTRIBUTE4"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE5" alias="INDUSTRY_ATTRIBUTE5" source="src0" value="src0.INDUSTRY_ATTRIBUTE5"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE6" alias="INDUSTRY_ATTRIBUTE6" source="src0" value="src0.INDUSTRY_ATTRIBUTE6"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE7" alias="INDUSTRY_ATTRIBUTE7" source="src0" value="src0.INDUSTRY_ATTRIBUTE7"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE8" alias="INDUSTRY_ATTRIBUTE8" source="src0" value="src0.INDUSTRY_ATTRIBUTE8"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE9" alias="INDUSTRY_ATTRIBUTE9" source="src0" value="src0.INDUSTRY_ATTRIBUTE9"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE10" alias="INDUSTRY_ATTRIBUTE10" source="src0" value="src0.INDUSTRY_ATTRIBUTE10"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE11" alias="INDUSTRY_ATTRIBUTE11" source="src0" value="src0.INDUSTRY_ATTRIBUTE11"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE13" alias="INDUSTRY_ATTRIBUTE13" source="src0" value="src0.INDUSTRY_ATTRIBUTE13"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE12" alias="INDUSTRY_ATTRIBUTE12" source="src0" value="src0.INDUSTRY_ATTRIBUTE12"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE14" alias="INDUSTRY_ATTRIBUTE14" source="src0" value="src0.INDUSTRY_ATTRIBUTE14"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE15" alias="INDUSTRY_ATTRIBUTE15" source="src0" value="src0.INDUSTRY_ATTRIBUTE15"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE16" alias="INDUSTRY_ATTRIBUTE16" source="src0" value="src0.INDUSTRY_ATTRIBUTE16"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE17" alias="INDUSTRY_ATTRIBUTE17" source="src0" value="src0.INDUSTRY_ATTRIBUTE17"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE18" alias="INDUSTRY_ATTRIBUTE18" source="src0" value="src0.INDUSTRY_ATTRIBUTE18"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE19" alias="INDUSTRY_ATTRIBUTE19" source="src0" value="src0.INDUSTRY_ATTRIBUTE19"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE20" alias="INDUSTRY_ATTRIBUTE20" source="src0" value="src0.INDUSTRY_ATTRIBUTE20"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE21" alias="INDUSTRY_ATTRIBUTE21" source="src0" value="src0.INDUSTRY_ATTRIBUTE21"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE22" alias="INDUSTRY_ATTRIBUTE22" source="src0" value="src0.INDUSTRY_ATTRIBUTE22"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE23" alias="INDUSTRY_ATTRIBUTE23" source="src0" value="src0.INDUSTRY_ATTRIBUTE23"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE24" alias="INDUSTRY_ATTRIBUTE24" source="src0" value="src0.INDUSTRY_ATTRIBUTE24"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE25" alias="INDUSTRY_ATTRIBUTE25" source="src0" value="src0.INDUSTRY_ATTRIBUTE25"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE26" alias="INDUSTRY_ATTRIBUTE26" source="src0" value="src0.INDUSTRY_ATTRIBUTE26"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE27" alias="INDUSTRY_ATTRIBUTE27" source="src0" value="src0.INDUSTRY_ATTRIBUTE27"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE28" alias="INDUSTRY_ATTRIBUTE28" source="src0" value="src0.INDUSTRY_ATTRIBUTE28"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE29" alias="INDUSTRY_ATTRIBUTE29" source="src0" value="src0.INDUSTRY_ATTRIBUTE29"/>
+  <COLUMN name="INDUSTRY_ATTRIBUTE30" alias="INDUSTRY_ATTRIBUTE30" source="src0" value="src0.INDUSTRY_ATTRIBUTE30"/>
+  <COLUMN name="CREATION_DATE" alias="CREATION_DATE" source="src0" value="src0.CREATION_DATE"/>
+  <COLUMN name="CREATED_BY" alias="CREATED_BY" source="src0" value="src0.CREATED_BY"/>
+  <COLUMN name="LAST_UPDATE_DATE" alias="LAST_UPDATE_DATE" source="src0" value="src0.LAST_UPDATE_DATE"/>
+  <COLUMN name="LAST_UPDATED_BY" alias="LAST_UPDATED_BY" source="src0" value="src0.LAST_UPDATED_BY"/>
+  <COLUMN name="LAST_UPDATE_LOGIN" alias="LAST_UPDATE_LOGIN" source="src0" value="src0.LAST_UPDATE_LOGIN"/>
+  <COLUMN name="PROGRAM_APPLICATION_ID" alias="PROGRAM_APPLICATION_ID" source="src0" value="src0.PROGRAM_APPLICATION_ID"/>
+  <COLUMN name="PROGRAM_ID" alias="PROGRAM_ID" source="src0" value="src0.PROGRAM_ID"/>
+  <COLUMN name="PROGRAM_UPDATE_DATE" alias="PROGRAM_UPDATE_DATE" source="src0" value="src0.PROGRAM_UPDATE_DATE"/>
+  <COLUMN name="REQUEST_ID" alias="REQUEST_ID" source="src0" value="src0.REQUEST_ID"/>
+  <COLUMN name="TOP_MODEL_LINE_ID" alias="TOP_MODEL_LINE_ID" source="src0" value="src0.TOP_MODEL_LINE_ID"/>
+  <COLUMN name="LINK_TO_LINE_ID" alias="LINK_TO_LINE_ID" source="src0" value="src0.LINK_TO_LINE_ID"/>
+  <COLUMN name="COMPONENT_SEQUENCE_ID" alias="COMPONENT_SEQUENCE_ID" source="src0" value="src0.COMPONENT_SEQUENCE_ID"/>
+  <COLUMN name="COMPONENT_CODE" alias="COMPONENT_CODE" source="src0" value="src0.COMPONENT_CODE"/>
+  <COLUMN name="CONFIG_DISPLAY_SEQUENCE" alias="CONFIG_DISPLAY_SEQUENCE" source="src0" value="src0.CONFIG_DISPLAY_SEQUENCE"/>
+  <COLUMN name="SORT_ORDER" alias="SORT_ORDER" source="src0" value="src0.SORT_ORDER"/>
+  <COLUMN name="ITEM_TYPE_CODE" alias="ITEM_TYPE_CODE" source="src0" value="src0.ITEM_TYPE_CODE"/>
+  <COLUMN name="OPTION_NUMBER" alias="OPTION_NUMBER" source="src0" value="src0.OPTION_NUMBER"/>
+  <COLUMN name="OPTION_FLAG" alias="OPTION_FLAG" source="src0" value="src0.OPTION_FLAG"/>
+  <COLUMN name="DEP_PLAN_REQUIRED_FLAG" alias="DEP_PLAN_REQUIRED_FLAG" source="src0" value="src0.DEP_PLAN_REQUIRED_FLAG"/>
+  <COLUMN name="VISIBLE_DEMAND_FLAG" alias="VISIBLE_DEMAND_FLAG" source="src0" value="src0.VISIBLE_DEMAND_FLAG"/>
+  <COLUMN name="LINE_CATEGORY_CODE" alias="LINE_CATEGORY_CODE" source="src0" value="src0.LINE_CATEGORY_CODE"/>
+  <COLUMN name="ACTUAL_SHIPMENT_DATE" alias="ACTUAL_SHIPMENT_DATE" source="src0" value="src0.ACTUAL_SHIPMENT_DATE"/>
+  <COLUMN name="CUSTOMER_TRX_LINE_ID" alias="CUSTOMER_TRX_LINE_ID" source="src0" value="src0.CUSTOMER_TRX_LINE_ID"/>
+  <COLUMN name="RETURN_CONTEXT" alias="RETURN_CONTEXT" source="src0" value="src0.RETURN_CONTEXT"/>
+  <COLUMN name="RETURN_ATTRIBUTE1" alias="RETURN_ATTRIBUTE1" source="src0" value="src0.RETURN_ATTRIBUTE1"/>
+  <COLUMN name="RETURN_ATTRIBUTE2" alias="RETURN_ATTRIBUTE2" source="src0" value="src0.RETURN_ATTRIBUTE2"/>
+  <COLUMN name="RETURN_ATTRIBUTE3" alias="RETURN_ATTRIBUTE3" source="src0" value="src0.RETURN_ATTRIBUTE3"/>
+  <COLUMN name="RETURN_ATTRIBUTE4" alias="RETURN_ATTRIBUTE4" source="src0" value="src0.RETURN_ATTRIBUTE4"/>
+  <COLUMN name="RETURN_ATTRIBUTE5" alias="RETURN_ATTRIBUTE5" source="src0" value="src0.RETURN_ATTRIBUTE5"/>
+  <COLUMN name="RETURN_ATTRIBUTE6" alias="RETURN_ATTRIBUTE6" source="src0" value="src0.RETURN_ATTRIBUTE6"/>
+  <COLUMN name="RETURN_ATTRIBUTE7" alias="RETURN_ATTRIBUTE7" source="src0" value="src0.RETURN_ATTRIBUTE7"/>
+  <COLUMN name="RETURN_ATTRIBUTE8" alias="RETURN_ATTRIBUTE8" source="src0" value="src0.RETURN_ATTRIBUTE8"/>
+  <COLUMN name="RETURN_ATTRIBUTE9" alias="RETURN_ATTRIBUTE9" source="src0" value="src0.RETURN_ATTRIBUTE9"/>
+  <COLUMN name="RETURN_ATTRIBUTE10" alias="RETURN_ATTRIBUTE10" source="src0" value="src0.RETURN_ATTRIBUTE10"/>
+  <COLUMN name="RETURN_ATTRIBUTE11" alias="RETURN_ATTRIBUTE11" source="src0" value="src0.RETURN_ATTRIBUTE11"/>
+  <COLUMN name="RETURN_ATTRIBUTE12" alias="RETURN_ATTRIBUTE12" source="src0" value="src0.RETURN_ATTRIBUTE12"/>
+  <COLUMN name="RETURN_ATTRIBUTE13" alias="RETURN_ATTRIBUTE13" source="src0" value="src0.RETURN_ATTRIBUTE13"/>
+  <COLUMN name="RETURN_ATTRIBUTE14" alias="RETURN_ATTRIBUTE14" source="src0" value="src0.RETURN_ATTRIBUTE14"/>
+  <COLUMN name="RETURN_ATTRIBUTE15" alias="RETURN_ATTRIBUTE15" source="src0" value="src0.RETURN_ATTRIBUTE15"/>
+  <COLUMN name="ACTUAL_ARRIVAL_DATE" alias="ACTUAL_ARRIVAL_DATE" source="src0" value="src0.ACTUAL_ARRIVAL_DATE"/>
+  <COLUMN name="ATO_LINE_ID" alias="ATO_LINE_ID" source="src0" value="src0.ATO_LINE_ID"/>
+  <COLUMN name="AUTO_SELECTED_QUANTITY" alias="AUTO_SELECTED_QUANTITY" source="src0" value="src0.AUTO_SELECTED_QUANTITY"/>
+  <COLUMN name="COMPONENT_NUMBER" alias="COMPONENT_NUMBER" source="src0" value="src0.COMPONENT_NUMBER"/>
+  <COLUMN name="EARLIEST_ACCEPTABLE_DATE" alias="EARLIEST_ACCEPTABLE_DATE" source="src0" value="src0.EARLIEST_ACCEPTABLE_DATE"/>
+  <COLUMN name="EXPLOSION_DATE" alias="EXPLOSION_DATE" source="src0" value="src0.EXPLOSION_DATE"/>
+  <COLUMN name="LATEST_ACCEPTABLE_DATE" alias="LATEST_ACCEPTABLE_DATE" source="src0" value="src0.LATEST_ACCEPTABLE_DATE"/>
+  <COLUMN name="MODEL_GROUP_NUMBER" alias="MODEL_GROUP_NUMBER" source="src0" value="src0.MODEL_GROUP_NUMBER"/>
+  <COLUMN name="SCHEDULE_ARRIVAL_DATE" alias="SCHEDULE_ARRIVAL_DATE" source="src0" value="src0.SCHEDULE_ARRIVAL_DATE"/>
+  <COLUMN name="SHIP_MODEL_COMPLETE_FLAG" alias="SHIP_MODEL_COMPLETE_FLAG" source="src0" value="src0.SHIP_MODEL_COMPLETE_FLAG"/>
+  <COLUMN name="SCHEDULE_STATUS_CODE" alias="SCHEDULE_STATUS_CODE" source="src0" value="src0.SCHEDULE_STATUS_CODE"/>
+  <COLUMN name="SOURCE_TYPE_CODE" alias="SOURCE_TYPE_CODE" source="src0" value="src0.SOURCE_TYPE_CODE"/>
+  <COLUMN name="CANCELLED_FLAG" alias="CANCELLED_FLAG" source="src0" value="src0.CANCELLED_FLAG"/>
+  <COLUMN name="OPEN_FLAG" alias="OPEN_FLAG" source="src0" value="src0.OPEN_FLAG"/>
+  <COLUMN name="BOOKED_FLAG" alias="BOOKED_FLAG" source="src0" value="src0.BOOKED_FLAG"/>
+  <COLUMN name="SALESREP_ID" alias="SALESREP_ID" source="src0" value="src0.SALESREP_ID"/>
+  <COLUMN name="RETURN_REASON_CODE" alias="RETURN_REASON_CODE" source="src0" value="src0.RETURN_REASON_CODE"/>
+  <COLUMN name="ARRIVAL_SET_ID" alias="ARRIVAL_SET_ID" source="src0" value="src0.ARRIVAL_SET_ID"/>
+  <COLUMN name="SHIP_SET_ID" alias="SHIP_SET_ID" source="src0" value="src0.SHIP_SET_ID"/>
+  <COLUMN name="SPLIT_FROM_LINE_ID" alias="SPLIT_FROM_LINE_ID" source="src0" value="src0.SPLIT_FROM_LINE_ID"/>
+  <COLUMN name="CUST_PRODUCTION_SEQ_NUM" alias="CUST_PRODUCTION_SEQ_NUM" source="src0" value="src0.CUST_PRODUCTION_SEQ_NUM"/>
+  <COLUMN name="AUTHORIZED_TO_SHIP_FLAG" alias="AUTHORIZED_TO_SHIP_FLAG" source="src0" value="src0.AUTHORIZED_TO_SHIP_FLAG"/>
+  <COLUMN name="OVER_SHIP_REASON_CODE" alias="OVER_SHIP_REASON_CODE" source="src0" value="src0.OVER_SHIP_REASON_CODE"/>
+  <COLUMN name="OVER_SHIP_RESOLVED_FLAG" alias="OVER_SHIP_RESOLVED_FLAG" source="src0" value="src0.OVER_SHIP_RESOLVED_FLAG"/>
+  <COLUMN name="ORDERED_ITEM_ID" alias="ORDERED_ITEM_ID" source="src0" value="src0.ORDERED_ITEM_ID"/>
+  <COLUMN name="ITEM_IDENTIFIER_TYPE" alias="ITEM_IDENTIFIER_TYPE" source="src0" value="src0.ITEM_IDENTIFIER_TYPE"/>
+  <COLUMN name="CONFIGURATION_ID" alias="CONFIGURATION_ID" source="src0" value="src0.CONFIGURATION_ID"/>
+  <COLUMN name="COMMITMENT_ID" alias="COMMITMENT_ID" source="src0" value="src0.COMMITMENT_ID"/>
+  <COLUMN name="SHIPPING_INTERFACED_FLAG" alias="SHIPPING_INTERFACED_FLAG" source="src0" value="src0.SHIPPING_INTERFACED_FLAG"/>
+  <COLUMN name="CREDIT_INVOICE_LINE_ID" alias="CREDIT_INVOICE_LINE_ID" source="src0" value="src0.CREDIT_INVOICE_LINE_ID"/>
+  <COLUMN name="FIRST_ACK_CODE" alias="FIRST_ACK_CODE" source="src0" value="src0.FIRST_ACK_CODE"/>
+  <COLUMN name="FIRST_ACK_DATE" alias="FIRST_ACK_DATE" source="src0" value="src0.FIRST_ACK_DATE"/>
+  <COLUMN name="LAST_ACK_CODE" alias="LAST_ACK_CODE" source="src0" value="src0.LAST_ACK_CODE"/>
+  <COLUMN name="LAST_ACK_DATE" alias="LAST_ACK_DATE" source="src0" value="src0.LAST_ACK_DATE"/>
+  <COLUMN name="PLANNING_PRIORITY" alias="PLANNING_PRIORITY" source="src0" value="src0.PLANNING_PRIORITY"/>
+  <COLUMN name="ORDER_SOURCE_ID" alias="ORDER_SOURCE_ID" source="src0" value="src0.ORDER_SOURCE_ID"/>
+  <COLUMN name="ORIG_SYS_SHIPMENT_REF" alias="ORIG_SYS_SHIPMENT_REF" source="src0" value="src0.ORIG_SYS_SHIPMENT_REF"/>
+  <COLUMN name="CHANGE_SEQUENCE" alias="CHANGE_SEQUENCE" source="src0" value="src0.CHANGE_SEQUENCE"/>
+  <COLUMN name="DROP_SHIP_FLAG" alias="DROP_SHIP_FLAG" source="src0" value="src0.DROP_SHIP_FLAG"/>
+  <COLUMN name="CUSTOMER_LINE_NUMBER" alias="CUSTOMER_LINE_NUMBER" source="src0" value="src0.CUSTOMER_LINE_NUMBER"/>
+  <COLUMN name="CUSTOMER_SHIPMENT_NUMBER" alias="CUSTOMER_SHIPMENT_NUMBER" source="src0" value="src0.CUSTOMER_SHIPMENT_NUMBER"/>
+  <COLUMN name="CUSTOMER_ITEM_NET_PRICE" alias="CUSTOMER_ITEM_NET_PRICE" source="src0" value="src0.CUSTOMER_ITEM_NET_PRICE"/>
+  <COLUMN name="CUSTOMER_PAYMENT_TERM_ID" alias="CUSTOMER_PAYMENT_TERM_ID" source="src0" value="src0.CUSTOMER_PAYMENT_TERM_ID"/>
+  <COLUMN name="FULFILLED_FLAG" alias="FULFILLED_FLAG" source="src0" value="src0.FULFILLED_FLAG"/>
+  <COLUMN name="END_ITEM_UNIT_NUMBER" alias="END_ITEM_UNIT_NUMBER" source="src0" value="src0.END_ITEM_UNIT_NUMBER"/>
+  <COLUMN name="CONFIG_HEADER_ID" alias="CONFIG_HEADER_ID" source="src0" value="src0.CONFIG_HEADER_ID"/>
+  <COLUMN name="CONFIG_REV_NBR" alias="CONFIG_REV_NBR" source="src0" value="src0.CONFIG_REV_NBR"/>
+  <COLUMN name="MFG_COMPONENT_SEQUENCE_ID" alias="MFG_COMPONENT_SEQUENCE_ID" source="src0" value="src0.MFG_COMPONENT_SEQUENCE_ID"/>
+  <COLUMN name="SHIPPING_INSTRUCTIONS" alias="SHIPPING_INSTRUCTIONS" source="src0" value="src0.SHIPPING_INSTRUCTIONS"/>
+  <COLUMN name="PACKING_INSTRUCTIONS" alias="PACKING_INSTRUCTIONS" source="src0" value="src0.PACKING_INSTRUCTIONS"/>
+  <COLUMN name="INVOICED_QUANTITY" alias="INVOICED_QUANTITY" source="src0" value="src0.INVOICED_QUANTITY"/>
+  <COLUMN name="REFERENCE_CUSTOMER_TRX_LINE_ID" alias="REFERENCE_CUSTOMER_TRX_LINE_ID" source="src0" value="src0.REFERENCE_CUSTOMER_TRX_LINE_ID"/>
+  <COLUMN name="SPLIT_BY" alias="SPLIT_BY" source="src0" value="src0.SPLIT_BY"/>
+  <COLUMN name="LINE_SET_ID" alias="LINE_SET_ID" source="src0" value="src0.LINE_SET_ID"/>
+  <COLUMN name="SERVICE_TXN_REASON_CODE" alias="SERVICE_TXN_REASON_CODE" source="src0" value="src0.SERVICE_TXN_REASON_CODE"/>
+  <COLUMN name="SERVICE_TXN_COMMENTS" alias="SERVICE_TXN_COMMENTS" source="src0" value="src0.SERVICE_TXN_COMMENTS"/>
+  <COLUMN name="SERVICE_DURATION" alias="SERVICE_DURATION" source="src0" value="src0.SERVICE_DURATION"/>
+  <COLUMN name="SERVICE_START_DATE" alias="SERVICE_START_DATE" source="src0" value="src0.SERVICE_START_DATE"/>
+  <COLUMN name="SERVICE_END_DATE" alias="SERVICE_END_DATE" source="src0" value="src0.SERVICE_END_DATE"/>
+  <COLUMN name="SERVICE_COTERMINATE_FLAG" alias="SERVICE_COTERMINATE_FLAG" source="src0" value="src0.SERVICE_COTERMINATE_FLAG"/>
+  <COLUMN name="UNIT_LIST_PERCENT" alias="UNIT_LIST_PERCENT" source="src0" value="src0.UNIT_LIST_PERCENT"/>
+  <COLUMN name="UNIT_SELLING_PERCENT" alias="UNIT_SELLING_PERCENT" source="src0" value="src0.UNIT_SELLING_PERCENT"/>
+  <COLUMN name="UNIT_PERCENT_BASE_PRICE" alias="UNIT_PERCENT_BASE_PRICE" source="src0" value="src0.UNIT_PERCENT_BASE_PRICE"/>
+  <COLUMN name="SERVICE_NUMBER" alias="SERVICE_NUMBER" source="src0" value="src0.SERVICE_NUMBER"/>
+  <COLUMN name="SERVICE_PERIOD" alias="SERVICE_PERIOD" source="src0" value="src0.SERVICE_PERIOD"/>
+  <COLUMN name="SHIPPABLE_FLAG" alias="SHIPPABLE_FLAG" source="src0" value="src0.SHIPPABLE_FLAG"/>
+  <COLUMN name="MODEL_REMNANT_FLAG" alias="MODEL_REMNANT_FLAG" source="src0" value="src0.MODEL_REMNANT_FLAG"/>
+  <COLUMN name="RE_SOURCE_FLAG" alias="RE_SOURCE_FLAG" source="src0" value="src0.RE_SOURCE_FLAG"/>
+  <COLUMN name="FLOW_STATUS_CODE" alias="FLOW_STATUS_CODE" source="src0" value="src0.FLOW_STATUS_CODE"/>
+  <COLUMN name="TP_CONTEXT" alias="TP_CONTEXT" source="src0" value="src0.TP_CONTEXT"/>
+  <COLUMN name="TP_ATTRIBUTE1" alias="TP_ATTRIBUTE1" source="src0" value="src0.TP_ATTRIBUTE1"/>
+  <COLUMN name="TP_ATTRIBUTE2" alias="TP_ATTRIBUTE2" source="src0" value="src0.TP_ATTRIBUTE2"/>
+  <COLUMN name="TP_ATTRIBUTE3" alias="TP_ATTRIBUTE3" source="src0" value="src0.TP_ATTRIBUTE3"/>
+  <COLUMN name="TP_ATTRIBUTE4" alias="TP_ATTRIBUTE4" source="src0" value="src0.TP_ATTRIBUTE4"/>
+  <COLUMN name="TP_ATTRIBUTE5" alias="TP_ATTRIBUTE5" source="src0" value="src0.TP_ATTRIBUTE5"/>
+  <COLUMN name="TP_ATTRIBUTE6" alias="TP_ATTRIBUTE6" source="src0" value="src0.TP_ATTRIBUTE6"/>
+  <COLUMN name="TP_ATTRIBUTE7" alias="TP_ATTRIBUTE7" source="src0" value="src0.TP_ATTRIBUTE7"/>
+  <COLUMN name="TP_ATTRIBUTE8" alias="TP_ATTRIBUTE8" source="src0" value="src0.TP_ATTRIBUTE8"/>
+  <COLUMN name="TP_ATTRIBUTE9" alias="TP_ATTRIBUTE9" source="src0" value="src0.TP_ATTRIBUTE9"/>
+  <COLUMN name="TP_ATTRIBUTE10" alias="TP_ATTRIBUTE10" source="src0" value="src0.TP_ATTRIBUTE10"/>
+  <COLUMN name="TP_ATTRIBUTE11" alias="TP_ATTRIBUTE11" source="src0" value="src0.TP_ATTRIBUTE11"/>
+  <COLUMN name="TP_ATTRIBUTE12" alias="TP_ATTRIBUTE12" source="src0" value="src0.TP_ATTRIBUTE12"/>
+  <COLUMN name="TP_ATTRIBUTE13" alias="TP_ATTRIBUTE13" source="src0" value="src0.TP_ATTRIBUTE13"/>
+  <COLUMN name="TP_ATTRIBUTE14" alias="TP_ATTRIBUTE14" source="src0" value="src0.TP_ATTRIBUTE14"/>
+  <COLUMN name="TP_ATTRIBUTE15" alias="TP_ATTRIBUTE15" source="src0" value="src0.TP_ATTRIBUTE15"/>
+  <COLUMN name="FULFILLMENT_METHOD_CODE" alias="FULFILLMENT_METHOD_CODE" source="src0" value="src0.FULFILLMENT_METHOD_CODE"/>
+  <COLUMN name="MARKETING_SOURCE_CODE_ID" alias="MARKETING_SOURCE_CODE_ID" source="src0" value="src0.MARKETING_SOURCE_CODE_ID"/>
+  <COLUMN name="SERVICE_REFERENCE_TYPE_CODE" alias="SERVICE_REFERENCE_TYPE_CODE" source="src0" value="src0.SERVICE_REFERENCE_TYPE_CODE"/>
+  <COLUMN name="SERVICE_REFERENCE_LINE_ID" alias="SERVICE_REFERENCE_LINE_ID" source="src0" value="src0.SERVICE_REFERENCE_LINE_ID"/>
+  <COLUMN name="SERVICE_REFERENCE_SYSTEM_ID" alias="SERVICE_REFERENCE_SYSTEM_ID" source="src0" value="src0.SERVICE_REFERENCE_SYSTEM_ID"/>
+  <COLUMN name="CALCULATE_PRICE_FLAG" alias="CALCULATE_PRICE_FLAG" source="src0" value="src0.CALCULATE_PRICE_FLAG"/>
+  <COLUMN name="UPGRADED_FLAG" alias="UPGRADED_FLAG" source="src0" value="src0.UPGRADED_FLAG"/>
+  <COLUMN name="REVENUE_AMOUNT" alias="REVENUE_AMOUNT" source="src0" value="src0.REVENUE_AMOUNT"/>
+  <COLUMN name="FULFILLMENT_DATE" alias="FULFILLMENT_DATE" source="src0" value="src0.FULFILLMENT_DATE"/>
+  <COLUMN name="PREFERRED_GRADE" alias="PREFERRED_GRADE" source="src0" value="src0.PREFERRED_GRADE"/>
+  <COLUMN name="ORDERED_QUANTITY2" alias="ORDERED_QUANTITY2" source="src0" value="src0.ORDERED_QUANTITY2"/>
+  <COLUMN name="ORDERED_QUANTITY_UOM2" alias="ORDERED_QUANTITY_UOM2" source="src0" value="src0.ORDERED_QUANTITY_UOM2"/>
+  <COLUMN name="SHIPPING_QUANTITY2" alias="SHIPPING_QUANTITY2" source="src0" value="src0.SHIPPING_QUANTITY2"/>
+  <COLUMN name="CANCELLED_QUANTITY2" alias="CANCELLED_QUANTITY2" source="src0" value="src0.CANCELLED_QUANTITY2"/>
+  <COLUMN name="SHIPPED_QUANTITY2" alias="SHIPPED_QUANTITY2" source="src0" value="src0.SHIPPED_QUANTITY2"/>
+  <COLUMN name="SHIPPING_QUANTITY_UOM2" alias="SHIPPING_QUANTITY_UOM2" source="src0" value="src0.SHIPPING_QUANTITY_UOM2"/>
+  <COLUMN name="FULFILLED_QUANTITY2" alias="FULFILLED_QUANTITY2" source="src0" value="src0.FULFILLED_QUANTITY2"/>
+  <COLUMN name="MFG_LEAD_TIME" alias="MFG_LEAD_TIME" source="src0" value="src0.MFG_LEAD_TIME"/>
+  <COLUMN name="LOCK_CONTROL" alias="LOCK_CONTROL" source="src0" value="src0.LOCK_CONTROL"/>
+  <COLUMN name="SUBINVENTORY" alias="SUBINVENTORY" source="src0" value="src0.SUBINVENTORY"/>
+  <COLUMN name="UNIT_LIST_PRICE_PER_PQTY" alias="UNIT_LIST_PRICE_PER_PQTY" source="src0" value="src0.UNIT_LIST_PRICE_PER_PQTY"/>
+  <COLUMN name="UNIT_SELLING_PRICE_PER_PQTY" alias="UNIT_SELLING_PRICE_PER_PQTY" source="src0" value="src0.UNIT_SELLING_PRICE_PER_PQTY"/>
+  <COLUMN name="PRICE_REQUEST_CODE" alias="PRICE_REQUEST_CODE" source="src0" value="src0.PRICE_REQUEST_CODE"/>
+  <COLUMN name="ORIGINAL_INVENTORY_ITEM_ID" alias="ORIGINAL_INVENTORY_ITEM_ID" source="src0" value="src0.ORIGINAL_INVENTORY_ITEM_ID"/>
+  <COLUMN name="ORIGINAL_ORDERED_ITEM_ID" alias="ORIGINAL_ORDERED_ITEM_ID" source="src0" value="src0.ORIGINAL_ORDERED_ITEM_ID"/>
+  <COLUMN name="ORIGINAL_ORDERED_ITEM" alias="ORIGINAL_ORDERED_ITEM" source="src0" value="src0.ORIGINAL_ORDERED_ITEM"/>
+  <COLUMN name="ORIGINAL_ITEM_IDENTIFIER_TYPE" alias="ORIGINAL_ITEM_IDENTIFIER_TYPE" source="src0" value="src0.ORIGINAL_ITEM_IDENTIFIER_TYPE"/>
+  <COLUMN name="ITEM_SUBSTITUTION_TYPE_CODE" alias="ITEM_SUBSTITUTION_TYPE_CODE" source="src0" value="src0.ITEM_SUBSTITUTION_TYPE_CODE"/>
+  <COLUMN name="OVERRIDE_ATP_DATE_CODE" alias="OVERRIDE_ATP_DATE_CODE" source="src0" value="src0.OVERRIDE_ATP_DATE_CODE"/>
+  <COLUMN name="LATE_DEMAND_PENALTY_FACTOR" alias="LATE_DEMAND_PENALTY_FACTOR" source="src0" value="src0.LATE_DEMAND_PENALTY_FACTOR"/>
+  <COLUMN name="ACCOUNTING_RULE_DURATION" alias="ACCOUNTING_RULE_DURATION" source="src0" value="src0.ACCOUNTING_RULE_DURATION"/>
+  <COLUMN name="ATTRIBUTE16" alias="ATTRIBUTE16" source="src0" value="src0.ATTRIBUTE16"/>
+  <COLUMN name="ATTRIBUTE17" alias="ATTRIBUTE17" source="src0" value="src0.ATTRIBUTE17"/>
+  <COLUMN name="ATTRIBUTE18" alias="ATTRIBUTE18" source="src0" value="src0.ATTRIBUTE18"/>
+  <COLUMN name="ATTRIBUTE19" alias="ATTRIBUTE19" source="src0" value="src0.ATTRIBUTE19"/>
+  <COLUMN name="ATTRIBUTE20" alias="ATTRIBUTE20" source="src0" value="src0.ATTRIBUTE20"/>
+  <COLUMN name="USER_ITEM_DESCRIPTION" alias="USER_ITEM_DESCRIPTION" source="src0" value="src0.USER_ITEM_DESCRIPTION"/>
+  <COLUMN name="UNIT_COST" alias="UNIT_COST" source="src0" value="src0.UNIT_COST"/>
+  <COLUMN name="ITEM_RELATIONSHIP_TYPE" alias="ITEM_RELATIONSHIP_TYPE" source="src0" value="src0.ITEM_RELATIONSHIP_TYPE"/>
+  <COLUMN name="BLANKET_LINE_NUMBER" alias="BLANKET_LINE_NUMBER" source="src0" value="src0.BLANKET_LINE_NUMBER"/>
+  <COLUMN name="BLANKET_NUMBER" alias="BLANKET_NUMBER" source="src0" value="src0.BLANKET_NUMBER"/>
+  <COLUMN name="BLANKET_VERSION_NUMBER" alias="BLANKET_VERSION_NUMBER" source="src0" value="src0.BLANKET_VERSION_NUMBER"/>
+  <COLUMN name="SALES_DOCUMENT_TYPE_CODE" alias="SALES_DOCUMENT_TYPE_CODE" source="src0" value="src0.SALES_DOCUMENT_TYPE_CODE"/>
+  <COLUMN name="FIRM_DEMAND_FLAG" alias="FIRM_DEMAND_FLAG" source="src0" value="src0.FIRM_DEMAND_FLAG"/>
+  <COLUMN name="EARLIEST_SHIP_DATE" alias="EARLIEST_SHIP_DATE" source="src0" value="src0.EARLIEST_SHIP_DATE"/>
+  <COLUMN name="TRANSACTION_PHASE_CODE" alias="TRANSACTION_PHASE_CODE" source="src0" value="src0.TRANSACTION_PHASE_CODE"/>
+  <COLUMN name="SOURCE_DOCUMENT_VERSION_NUMBER" alias="SOURCE_DOCUMENT_VERSION_NUMBER" source="src0" value="src0.SOURCE_DOCUMENT_VERSION_NUMBER"/>
+  <COLUMN name="PAYMENT_TYPE_CODE" alias="PAYMENT_TYPE_CODE" source="src0" value="src0.PAYMENT_TYPE_CODE"/>
+  <COLUMN name="MINISITE_ID" alias="MINISITE_ID" source="src0" value="src0.MINISITE_ID"/>
+  <COLUMN name="END_CUSTOMER_ID" alias="END_CUSTOMER_ID" source="src0" value="src0.END_CUSTOMER_ID"/>
+  <COLUMN name="END_CUSTOMER_CONTACT_ID" alias="END_CUSTOMER_CONTACT_ID" source="src0" value="src0.END_CUSTOMER_CONTACT_ID"/>
+  <COLUMN name="END_CUSTOMER_SITE_USE_ID" alias="END_CUSTOMER_SITE_USE_ID" source="src0" value="src0.END_CUSTOMER_SITE_USE_ID"/>
+  <COLUMN name="IB_OWNER" alias="IB_OWNER" source="src0" value="src0.IB_OWNER"/>
+  <COLUMN name="IB_CURRENT_LOCATION" alias="IB_CURRENT_LOCATION" source="src0" value="src0.IB_CURRENT_LOCATION"/>
+  <COLUMN name="IB_INSTALLED_AT_LOCATION" alias="IB_INSTALLED_AT_LOCATION" source="src0" value="src0.IB_INSTALLED_AT_LOCATION"/>
+  <COLUMN name="RETROBILL_REQUEST_ID" alias="RETROBILL_REQUEST_ID" source="src0" value="src0.RETROBILL_REQUEST_ID"/>
+  <COLUMN name="ORIGINAL_LIST_PRICE" alias="ORIGINAL_LIST_PRICE" source="src0" value="src0.ORIGINAL_LIST_PRICE"/>
+  <COLUMN name="SERVICE_CREDIT_ELIGIBLE_CODE" alias="SERVICE_CREDIT_ELIGIBLE_CODE" source="src0" value="src0.SERVICE_CREDIT_ELIGIBLE_CODE"/>
+  <COLUMN name="ORDER_FIRMED_DATE" alias="ORDER_FIRMED_DATE" source="src0" value="src0.ORDER_FIRMED_DATE"/>
+  <COLUMN name="ACTUAL_FULFILLMENT_DATE" alias="ACTUAL_FULFILLMENT_DATE" source="src0" value="src0.ACTUAL_FULFILLMENT_DATE"/>
+  <COLUMN name="CHARGE_PERIODICITY_CODE" alias="CHARGE_PERIODICITY_CODE" source="src0" value="src0.CHARGE_PERIODICITY_CODE"/>
+</SELECT>
+ 
+[1] "**************************************"
+[1] 0

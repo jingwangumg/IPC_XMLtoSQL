@@ -12,10 +12,12 @@
 
 
 process_general_object <- function(xml_query, xml_node, xml_input, from_name) {
+  print(paste0("------------------ processing ",from_name, " ------------------"))
 
   outgoing_connectors <- subset(connectors_unique_df, from_instance == from_name)
   target_xpath <- paste0("//*[not(name()='INSTANCE' or name()='SHORTCUT' or name()='ASSOCIATED_SOURCE_INSTANCE') and @NAME='", from_name, "']")
   xml_node <- xml_find_all(xml_input, target_xpath)
+  print(xml_node)
   
   # get type of node
   node_tag <- xml_name(xml_node)
@@ -29,9 +31,11 @@ process_general_object <- function(xml_query, xml_node, xml_input, from_name) {
   # if ( node_tag != "SOURCE") { #another condition needed?
   #   xml_query <- update_column_aliases(xml_query, from_name, xml_attr(xml_node, "NAME"))
   # }
+  
+  print(node_name)
+  print(node_type)
+  print(node_tag)
 
-  cat("\r\n")
-  print(paste0("#################### Start ", node_tag," : ",node_type," : ",from_name," ######################"))
 
   # process xml mapping object
   if (node_tag == "SOURCE") {                       # source
@@ -39,8 +43,7 @@ process_general_object <- function(xml_query, xml_node, xml_input, from_name) {
     # process xml mapping object
     return(xml_query)
   }else if (node_tag == "TARGET") {                       # source
-    ## Not to process target table
-    return (xml_query)
+    xml_query <- process_source_table(xml_query, xml_node)
   } else if (node_type == "Source Qualifier") {     # SQ
     xml_query <- process_source_qualifier(xml_query, xml_node, from_name)
   } else if (node_type == "Filter") {               # Filter
@@ -52,10 +55,8 @@ process_general_object <- function(xml_query, xml_node, xml_input, from_name) {
     xml_query <- process_expression(xml_query, xml_node, from_name)  
   }
   #print(xml_query)
-  cat(paste0(xml_to_sql(xml_query),"\r\n"))
+  print(xml_to_sql(xml_query))
 
-  print(paste0("#################### End ", node_tag," : ",node_type," : ",from_name,"  ######################"))
-  cat("\r\n\r\n")
   # add INCLUDED_OBJECT node inside
   curr_source <- "NA"
   # if (node_tag == "SOURCE") { 
@@ -123,6 +124,7 @@ process_source_table <- function(xml_query, xml_node) {
   # global variables 
   curr_select <- paste0("sub", counters_env$select_no)
   curr_source <- paste0("src", counters_env$source_no)
+  print(paste0("*********************",curr_source))
   
 
 
@@ -142,17 +144,17 @@ process_source_table <- function(xml_query, xml_node) {
                parent = select_node)
   }
   
-  # if(counters_env$select_no == 0 ){
+  if(counters_env$select_no == 0 ){
     # add TABLE node inside
     newXMLNode("TABLE", attrs = c(name = xml_attr(xml_node, "NAME"), 
                                 alias = curr_source),
              parent = select_node)
-  # }else{
+  }else{
 
-  #   newXMLNode("INCLUDED_OBJECT", attrs = c(name = xml_attr(xml_node, "NAME"), 
-  #                               alias = curr_source),
-  #            parent = select_node)
-  # }
+    newXMLNode("INCLUDED_OBJECT", attrs = c(name = xml_attr(xml_node, "NAME"), 
+                                alias = curr_source),
+             parent = select_node)
+  }
 
   #print(xml_query)
 
@@ -168,19 +170,13 @@ unescape_xml <- function(str){
 }
 
 process_lookup_procdure <- function(xml_query, xml_node, from_name) {
-  # global variables 
-  curr_select <- paste0("sub", counters_env$select_no)
-  select_node <- newXMLNode("SELECT", attrs = c(alias = curr_select), doc = xml_query)
-
   sql_node <- xml_find_all(xml_node, ".//TABLEATTRIBUTE[@NAME='Lookup Sql Override']")
   print(paste0("===================  WARNING:  ",from_name," Looup SQL overwrite ======================"))
-  cat(paste(xml_attr(sql_node, "VALUE"),"\r\n"))
-  print(paste0("=================== End WARNING:  ",from_name," Looup SQL overwrite ======================"))
-
+  cat(xml_attr(sql_node, "VALUE"))
   curr_source <- paste0("src", counters_env$source_no)
   select_node <- getNodeSet(xml_query, "//SELECT") 
 
-  newXMLNode("TABLE", attrs = c(name = xml_attr(xml_node, "NAME"), 
+  newXMLNode("INCLUDED_OBJECT", attrs = c(name = xml_attr(xml_node, "NAME"), 
                                 alias = curr_source),
              parent = select_node)
   # add COLUMN nodes inside
@@ -194,15 +190,18 @@ process_lookup_procdure <- function(xml_query, xml_node, from_name) {
                parent = select_node)
   }
   counters_env$source_no <<- counters_env$source_no+1
+
   return(xml_query)
 
 }
 
 process_source_qualifier <- function(xml_query, xml_node, from_name) {
   # condition - only if exists 
+  print(paste0("#################### Start Source Qualifier: ", from_name," ######################"))
   sql_node <- xml_find_all(xml_node, ".//TABLEATTRIBUTE[@NAME='Sql Query']")
   print(paste0("==================  WARNING:  ",from_name," SQL Query Override =================="))
-  cat(paste0(xml_attr(sql_node, "VALUE"), "\r\n"))
+  cat(xml_attr(sql_node, "VALUE"))
+  print("")
   print(paste0("================================================================================="))
 
 
@@ -226,17 +225,17 @@ process_source_qualifier <- function(xml_query, xml_node, from_name) {
                                    value = paste0(curr_source, ".", at_name)),
                parent = select_node)
   }
-  # if(counters_env$select_no == 0 ){
+  if(counters_env$select_no == 0 ){
     # add TABLE node inside
     newXMLNode("TABLE", attrs = c(name = xml_attr(xml_node, "NAME"), 
                                 alias = curr_source),
              parent = select_node)
-  # }else{
+  }else{
 
-  #   newXMLNode("INCLUDED_OBJECT", attrs = c(name = xml_attr(xml_node, "NAME"), 
-  #                               alias = curr_source),
-  #               parent = select_node)
-  # }
+    newXMLNode("INCLUDED_OBJECT", attrs = c(name = xml_attr(xml_node, "NAME"), 
+                                alias = curr_source),
+                parent = select_node)
+  }
    #print(xml_query)
 
   counters_env$select_no <<- counters_env$select_no+1
@@ -262,6 +261,7 @@ process_source_qualifier <- function(xml_query, xml_node, from_name) {
   # } else {
   #   print("error2002")
   # }
+  print(paste0("#################### End Source Qualifier: ", from_name," ######################"))
   return(xml_query)
 }
 
@@ -290,10 +290,11 @@ process_filter <- function(xml_query, xml_node, from_name) {
 }
 
 process_expression <- function(xml_query, xml_node, from_name) {
-  #select_node <- getNodeSet(xml_query, "//SELECT") 
+  print("******process_expression")
+  select_node <- getNodeSet(xml_query, "//SELECT") 
 
-
-
+  ## get all TRANSFORMFIELD tags, 
+  transformfields <- xml_find_all(xml_node, ".//TRANSFORMFIELD")
   ## find pairs for - replace column name in expression value for column name from source
   finds <- c()   #ones I am looking for to replace
   repls <- c()   #replacements
@@ -331,127 +332,80 @@ process_expression <- function(xml_query, xml_node, from_name) {
   # }
   # print(xml_query)
    
-   ## get all TRANSFORMFIELD tags, 
-  transformfields <- xml_find_all(xml_node, ".//TRANSFORMFIELD")
+ 
 
-
-  # for (tf in transformfields) {
-  #   curr_f <- xml_attr(tf, "NAME")
-  #   curr_r <- NULL
-  #   nodesett <- getNodeSet(xml_query, paste0("//SELECT/COLUMN[@alias='", curr_f, "']"))
-  #   if (length(nodesett) == 1) {
-  #     curr_r <- unname(xmlAttrs(nodesett[[1]])['name'])
-  #     finds <- append(finds, curr_f)
-  #     repls <- append(repls, curr_r)
-  #   } else {
-  #     problem <- ""
-  #     if (length(nodesett) == 0) {
-  #       problem <- "no column with that name found"
-  #     } else if (length(nodesett) > 1) {
-  #       problem <- "more than 1 column with that name found"
-  #     } else {
-  #       problem <- "unknown"
-  #     }
-  #     print(paste0("EXPECTED ERROR 7001 (process_expression, column name in expression replacement for '",curr_f,"') problem: ", problem))
-  #   }
-  # }
-  # global variables 
-    curr_select <- paste0("sub", counters_env$select_no)
-    curr_source <- paste0("src", counters_env$source_no)
+  for (tf in transformfields) {
+    curr_f <- xml_attr(tf, "NAME")
+    curr_r <- NULL
+    nodesett <- getNodeSet(xml_query, paste0("//SELECT/COLUMN[@alias='", curr_f, "']"))
+    if (length(nodesett) == 1) {
+      curr_r <- unname(xmlAttrs(nodesett[[1]])['name'])
+      finds <- append(finds, curr_f)
+      repls <- append(repls, curr_r)
+    } else {
+      problem <- ""
+      if (length(nodesett) == 0) {
+        problem <- "no column with that name found"
+      } else if (length(nodesett) > 1) {
+        problem <- "more than 1 column with that name found"
+      } else {
+        problem <- "unknown"
+      }
+      print(paste0("EXPECTED ERROR 7001 (process_expression, column name in expression replacement for '",curr_f,"') problem: ", problem))
+    }
+  }
   
-    select_node <- newXMLNode("SELECT", attrs = c(alias = curr_select), doc = xml_query)
-    ## for each transformfield
+  ## for each transformfield
     for (trans in transformfields) {
         port_type <- xml_attr(trans, "PORTTYPE")
-        tran_name <- xml_attr(trans, "NAME")
-
-        # if(port_type == "OUTPUT"){
-        #   print(paste0("NOT PROCESSED: ",trans))
-        #   ### TODO: output only port
-        #   next
-        # }
+        if(port_type == "OUTPUT"){
+          print(paste0("NOT PROCESSED: ",trans))
+          ### TODO: output only port
+          next
+        }
         name <- xml_attr(trans, "NAME")
         expression <- xml_attr(trans, "EXPRESSION")
+        print(paste0("//CONNECTOR[@TOINSTANCE='", from_name, "' and @TOFIELD='",expression,"']"))
         connector<- xml_find_first(xml_node, paste0("//CONNECTOR[@TOINSTANCE='", from_name, "' and @TOFIELD='",expression,"']")) 
         source_instance <- xml_attr(connector, "FROMINSTANCE")
-        conm_from_field <-xml_attr(connector, "FROMFIELD")
-        conn_to_field <-xml_attr(connector, "TOFIELD")
-        if(is.na(source_instance)){
-            source_instance <- from_name
+        from_field <-xml_attr(connector, "FROMFIELD")
+       
+        print(length(connector[[1]]) )
+        print(paste0("//TABLE[@name='", source_instance, "']"))
+        source_alias <- "src0"
+        if(length(connector[[1]]) >0){
+            source_alias <- unname(xmlAttrs(getNodeSet(xml_query, paste0("//*[@name='", source_instance, "']"))[[1]])['alias'])
         }
-        
-        ## creating table or includeboject
-        source_node <- getNodeSet(xml_query, paste0("//*[@name='", source_instance, "']"))
-        if(length(source_node)==1){
-          # print("already existied source")
-        }else{
-          counters_env$source_no <<- counters_env$source_no+1
-          curr_source <- paste0("src", counters_env$source_no)
+        print(source_alias)
+    #source alias from previous object
+    #source_alias <- unname(xmlAttrs(getNodeSet(xml_query, paste0("//INCLUDED_OBJECT[@name='", from_name, "']"))[[1]])['alias'])
+    #source_alias <- unname(xmlAttrs(getNodeSet(xml_query, paste0("//TABLE[@name='", from_name, "']"))[[1]])['alias'])
+    ## check NAME attr; 
+    ## if there is not such column in xml_query, then add column  - expression is added later in this func
+    ## if there is, add only expression 
+    print(paste0("//COLUMN[@alias='", name, "'] -->", length(getNodeSet(xml_query, paste0("//COLUMN[@alias='", name, "']"))) ))
 
-          table_node <- getNodeSet(xml_query, paste0("//TABLE"))
-          
-          # if(length(table_node) == 0 ){
-            # add TABLE node inside
-            newXMLNode("TABLE", attrs = c(name = source_instance, 
-                                        alias = curr_source),
-                     parent = select_node)
-          # }else{
-
-          #   newXMLNode("INCLUDED_OBJECT", attrs = c(name = source_instance, 
-          #                               alias = curr_source),
-          #               parent = select_node)
-          # }
-        }
-
-        ## add more object
-        source_node <- getNodeSet(xml_query, paste0("//*[@name='", source_instance, "']"))[[1]]
-
-        if (length(getNodeSet(xml_query, paste0("//COLUMN[@alias='", name, "']"))) == 0) {
-          if(is.na(conn_to_field))conn_to_field=tran_name
-          newXMLNode("COLUMN", attrs = c(name = conn_to_field, alias = tran_name, source = unname(xmlAttrs(source_node)['alias']),
-                                     value = paste0(unname(xmlAttrs(source_node)['alias']), ".", name)), 
+    if (length(getNodeSet(xml_query, paste0("//COLUMN[@alias='", name, "']"))) == 0) {
+      newXMLNode("COLUMN", attrs = c(name = from_field, alias = name, source = source_alias, 
+                                     value = paste0(source_alias, ".", name)), 
                  parent = getNodeSet(xml_query, "//SELECT")[1])
-        } 
-
-    #     print(xml_query)
-
-    #     print(length(connector[[1]]) )
-    #     print(paste0("//TABLE[@name='", source_instance, "']"))
-    #     source_alias <- "src0"
-    #     if(length(connector[[1]]) >0){
-    #         source_alias <- unname(xmlAttrs(getNodeSet(xml_query, paste0("//*[@name='", source_instance, "']"))[[1]])['alias'])
-    #     }
-    #     print(source_alias)
-    # #source alias from previous object
-    # #source_alias <- unname(xmlAttrs(getNodeSet(xml_query, paste0("//INCLUDED_OBJECT[@name='", from_name, "']"))[[1]])['alias'])
-    # #source_alias <- unname(xmlAttrs(getNodeSet(xml_query, paste0("//TABLE[@name='", from_name, "']"))[[1]])['alias'])
-    # ## check NAME attr; 
-    # ## if there is not such column in xml_query, then add column  - expression is added later in this func
-    # ## if there is, add only expression 
-    # print(paste0("//COLUMN[@alias='", name, "'] -->", length(getNodeSet(xml_query, paste0("//COLUMN[@alias='", name, "']"))) ))
-
-    # if (length(getNodeSet(xml_query, paste0("//COLUMN[@alias='", name, "']"))) == 0) {
-    #   newXMLNode("COLUMN", attrs = c(name = from_field, alias = name, source = source_alias, 
-    #                                  value = paste0(source_alias, ".", name)), 
-    #              parent = getNodeSet(xml_query, "//SELECT")[1])
-    # } 
+    } 
     
     ## add EXPRESSION to column      
     expr_value <- xml_attr(trans, "EXPRESSION")
     if (!is.na(expr_value) && expr_value != name) { #if @expression is the same as @name, dont put in the expression, 
-
       ## get number of all expressions on that column + 1 for new level
-      #expr_level <- 1 + length(getNodeSet(xml_query, paste0("//SELECT/COLUMN[@name='", name,"' and @alias='", name, "' and @source='", source_alias, "']/EXPRESSION")))
-      expr_level <- 1
+      expr_level <- 1 + length(getNodeSet(xml_query, paste0("//SELECT/COLUMN[@name='", name,"' and @alias='", name, "' and @source='", source_alias, "']/EXPRESSION")))
+      
       ## column name replacement in expression value
       for (fi in 1:length(finds)) {
         expr_value <- gsub(paste0("([^a-zA-Z0-9]*)(", finds[fi], ")([^a-zA-Z0-9]*)"), 
                            paste0("\\1",repls[fi],"\\3"), expr_value, ignore.case = T)
       }
-      ## parent node - column to add expression to
-      column_node <- getNodeSet(xml_query, paste0("//SELECT/COLUMN[@name='", name, "' and @alias='", name, "' and @source='", unname(xmlAttrs(source_node)['alias']), "']"))[[1]]
       
-
+      ## parent node - column to add expression to
+      column_node <- getNodeSet(xml_query, paste0("//SELECT/COLUMN[@name='", name, "' and @alias='", name, "' and @source='", source_alias, "']"))[[1]]
+      
       ## add EXPRESSION node to xml_query
       newXMLNode("EXPRESSION", attrs = c(value = expr_value, level = expr_level, object = xml_attr(xml_node, "NAME")),
                  parent = column_node)
@@ -466,8 +420,9 @@ process_expression <- function(xml_query, xml_node, from_name) {
       # - pre kazdy column v tomto objekte loop? - iny byt nemoze a inak ich z expr nemam ako vytiahnut - rovnako ako hore, ale nahradzujem z @value
       #TODO: mysli na vhniezdovanie expressions
     }
+    print(xml_query)
   }
-
+  
   return(xml_query)
 }
 

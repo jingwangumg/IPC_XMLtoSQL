@@ -1,7 +1,9 @@
 library("xml2")
+library("igraph")
+
 
 #read xml
-xml_input <- read_xml("example.xml")
+xml_input <- read_xml("../test_files/hard_m_om_sde_li_dim.xml")
 
 #################################################
 ##
@@ -27,16 +29,39 @@ rm("from_instance", "to_instance", "from_field", "to_field")
 
 #################################################
 
-branch_starts <- c()
-branch_ends <- c()
-for (br_i in 1:length(all_objects)) {
-  if (sum(connectors_unique_df$to_instance == all_objects[br_i]) != 1) { #pocet vstupnych je rozny od 1 ... 0 ak je to source, 2+ ak join/union. spocitat tolko krat sa nachadza v uniq connectors, stlpec TO, teda kolko donho ide
-    branch_starts <- append(branch_starts, all_objects[br_i])
-  }
-  if (sum(connectors_unique_df$from_instance == all_objects[br_i]) != 1) { 
-    branch_ends <- append(branch_ends, all_objects[br_i])
-  }
-}
+igraph_options(print.graph.attributes = TRUE)
+
+
+sources <- xml_find_all(xml_input, ".//SOURCE")
+igraph_opt("print.graph.attributes", default=TRUE)
+g<-graph.data.frame(d = connectors_unique_df, directed = TRUE)
+# new_edges <- c(1,3, 1,5, 2,5, 4,5)
+# g <- add.edges(g, new_edges)
+
+print(connectors_unique_df$from_instance[0:5])
+#set_vertex_attr(g, "name", index = V(g), connectors_unique_df$from_instance[0:5] )
+print_all(g)
+
+sorted <- topo_sort(g, mode = c("out"))
+print("================")
+print(sorted)
+print_all(g)
+print(V(g)$name)
+
+
+# as_adj_list(g)
+# as_adj_edge_list(g)
+
+# branch_starts <- c()
+# branch_ends <- c()
+# for (br_i in 1:length(all_objects)) {
+#   if (sum(connectors_unique_df$to_instance == all_objects[br_i]) != 1) { #pocet vstupnych je rozny od 1 ... 0 ak je to source, 2+ ak join/union. spocitat tolko krat sa nachadza v uniq connectors, stlpec TO, teda kolko donho ide
+#     branch_starts <- append(branch_starts, all_objects[br_i])
+#   }
+#   if (sum(connectors_unique_df$from_instance == all_objects[br_i]) != 1) { 
+#     branch_ends <- append(branch_ends, all_objects[br_i])
+#   }
+# }
 
 #branches <- 
 
